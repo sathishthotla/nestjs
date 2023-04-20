@@ -1,0 +1,5 @@
+### list all massages
+GET http://localhost:3000/laptops
+
+###  
+POST http://localhost:300/laptops
