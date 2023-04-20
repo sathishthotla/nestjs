@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { EmployeeModule } from 'employee/employee.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Employee } from 'employee/entities/employee.entities';
 import { LaptopsModule } from './laptops/laptops.module';
 import { Laptop } from './laptops/entities/laptop.entity';
+import { EmployeeModule } from './employee/employee.module';
+import { Employee } from './employee/entities/employee.entities';
 
 @Module({
   imports: [EmployeeModule, TypeOrmModule.forRoot({
