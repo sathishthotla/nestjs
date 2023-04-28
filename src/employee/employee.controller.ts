@@ -3,6 +3,7 @@ import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/upadte-employee.dto';
 import { Employee } from './entities/employee.entities';
+import { identity } from 'rxjs';
 
 @Controller('employee')
 export class EmployeeController {
@@ -22,10 +23,11 @@ export class EmployeeController {
     return emp;
   }
 
-   @Get(':id')
-   findOne(@Param('id') id: string) {
-     //return this.employeeService.findone(+id);
-     return 'sateesh'
+   @Get('/:id')
+   findempbyid(@Param('id') id: number) {
+    // return this.employeeService.findOne(+id);
+    const emp= this.employeeService.findempbyid(id);
+    return emp;
    }
 
     @Patch('/updateemployee/:id')

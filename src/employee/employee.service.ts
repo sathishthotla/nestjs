@@ -7,6 +7,10 @@ import { Employee } from './entities/employee.entities';
 
 @Injectable()
 export class EmployeeService {
+  findoneby: any;
+  findemployeeid(id: number) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(Employee)
     private employeeRepository: Repository<Employee>,
@@ -20,15 +24,13 @@ export class EmployeeService {
     return this.employeeRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} employeetop`;
+   findempbyid(id: number) {
+     return this.employeeRepository.findOneBy({employeeid:id});
+     
    
   }
 
-  findtwo(id: number) {
-    return `This action returns a #${id} Employee`;
-  } 
-
+  
   update(id: number, updateEmployeeDto: UpdateEmployeeDto) {
    // return `This action updates a #${id} employee`;
    return this.employeeRepository.update(id,updateEmployeeDto);

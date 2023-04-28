@@ -8,20 +8,12 @@ import { EmployeeModule } from './employee/employee.module';
 import { Employee } from './employee/entities/employee.entities';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
+import { MongooseModule } from '@nestjs/mongoose';
+import { StudentModule } from './student/student.module';
 
 @Module({
-  imports: [UserModule,EmployeeModule, TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: '127.0.0.1',
-    port: 3306,
-    username: 'root',
-    password: 'root',
-    database: 'test',
-    entities: [User,Laptop,Employee],
-    synchronize: false,
-  }), LaptopsModule, UserModule,],
-  controllers: [AppController],
-  providers: [AppService, ],
- 
-})
+  imports: [
+MongooseModule.forRoot('mongodb://127.0.0.1:27017/balutest'),
+StudentModule
+],})
 export class AppModule {}

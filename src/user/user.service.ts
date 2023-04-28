@@ -27,11 +27,11 @@ export class UserService {
 
   update(id: number, updateUserDto: UpdateUserDto) {
     // return `This action updates a #${id} employee`;
-    console.log("checking-------->"+id);
+    
    // return this.userRepository.update(id,UpdateUserDto);
     return this.userRepository.update(id, { 
-            name: UpdateUserDto.name,       email: updateUserDto.email
-             // we cannot send id here 
+      name: UpdateUserDto.name,email: updateUserDto.email
+        
       })
    }
 
