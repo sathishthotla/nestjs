@@ -10,18 +10,10 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class TeacherService {
-  createMany(arg0: { fileupload: any; id: (id: any, arg1: { profileImage: any; }) => void; FirstName: any; Email: any; }) {
-    throw new Error('Method not implemented.');
-  }
-  teacherModel: any;
-  updateTeacherDto(id: string, FirstName: string, Email: string, file: Express.Multer.File) {
-    throw new Error('Method not implemented.');
-  }
-  updateTeacherInfo(id: string, name: string, email: string, file: Express.Multer.File) {
-    throw new Error('Method not implemented.');
-  }
-    fileModel: any;
+ 
+  fileModel: any;
     updateOne: any;
+  teacherModel: any;
   
     constructor(@InjectModel(Teacher.name) private readonly TeacherModel: Model < TeacherDocument > ) {}
   
@@ -35,6 +27,7 @@ export class TeacherService {
 
 
   async createfile(createTeacherDto: CreateTeacherDto): Promise < TeacherDocument > {
+    console.log("---teacher service response----->",createTeacherDto);
     const teacher = new this.TeacherModel(createTeacherDto);
     return teacher.save();
   }
@@ -48,11 +41,13 @@ export class TeacherService {
     return this.TeacherModel.findById(id);
   }
 
-  async update(id: string, updateTeacherDto: UpdateTeacherDto): Promise < TeacherDocument > {
+  async update(updateTeacherDto: UpdateTeacherDto): Promise < TeacherDocument > {
+    const teacher = new this.TeacherModel(updateTeacherDto);
+    const id = updateTeacherDto.id;
      return this.TeacherModel.findByIdAndUpdate(id, updateTeacherDto);
  }
- 
- async remove(id: string) {
+
+  async remove(id: string) {
     return this.TeacherModel.findByIdAndRemove(id);
   }
 }

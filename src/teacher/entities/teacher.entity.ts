@@ -1,5 +1,12 @@
 export class Teacher {
-    first: string;
-    email: string;
+    
+    title: string;
+    meetingDate: string;
+    meetingEndTime: string;
+    invitees: string;
+    initiator: string;
+    meetingtype: string;
+    meetingstarttime: string;
+    location: string;
     fileupload: string;
 }

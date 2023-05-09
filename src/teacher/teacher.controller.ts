@@ -24,27 +24,40 @@ import { request } from 'express';
 
     @Post('/addupload2')
     @UseInterceptors(FileInterceptor('file')) 
+
     uploadFile(@UploadedFile() file: Express.Multer.File,
     
     @Body() createTeacherDto: CreateTeacherDto) {
       console.log(file);
       console.log('---------->>',createTeacherDto);
-      console.log("-----====>>",createTeacherDto.Email);
+      console.log("-----====>>",createTeacherDto);
     
       //Convert the file to base64 string
-      const fileB64 = file.buffer.toString('base64');
-      const femail = createTeacherDto.Email;
-      const fname= createTeacherDto.FirstName;
-      //const FirstName = 'sathis';
+    var fileB64 = file.buffer.toString('base64');
+     var ftitle= createTeacherDto.title;
+     var fmeattingdate= createTeacherDto.meetingDate;
+     var fmettingendtime= createTeacherDto.meetingEndTime;
+    var finitiator= createTeacherDto.initiator;
+    var finvitees= createTeacherDto.invitees;
+    var fmeetingtype= createTeacherDto.meetingtype;
+    var fmeetingstarttime= createTeacherDto.meetingstarttime;
+    console.log('checking the values',finitiator,ftitle,fmeetingtype,fmettingendtime,fmeetingstarttime)
+    var flocation= createTeacherDto.location;
+     
       return this.teacherService.createfile({
         fileupload: fileB64,
-        id: function (id: any, arg1: { profileImage: any; }): void {
+        id: function (_id: any): void {
           throw new Error('Function not implemented.');
         },
-        FirstName: fname,
-        Email: femail
-        
-        });
+        meetingEndTime: fmettingendtime,
+        initiator: finitiator,
+        invitees: finvitees,
+        meetingtype: fmeetingtype,
+        meetingstarttime: fmeetingstarttime,
+        location: flocation,
+        title: ftitle,
+        meetingDate:fmeattingdate
+      });
     }
 
    
@@ -59,20 +72,51 @@ import { request } from 'express';
     }
   
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateTeacherDto: UpdateTeacherDto) {
-   console.log("sathish............................",updateTeacherDto)
-      return this.teacherService.update(id, updateTeacherDto);
-    }
-   
+    @UseInterceptors(FileInterceptor('file')) 
+    //uploadFile(@UploadedFile() file: Express.Multer.File,
+
+    Update(@UploadedFile() file: Express.Multer.File, @Param('id') id: string, @Body() updateTeacherDto: UpdateTeacherDto) {
+      var fileB64 = file.buffer.toString('base64');
+      var ftitle= updateTeacherDto.title;
+      var fmeattingdate= updateTeacherDto.meetingDate;
+      var fmettingendtime= updateTeacherDto.meetingEndTime;
+     var finitiator= updateTeacherDto.initiator;
+     var finvitees= updateTeacherDto.invitees;
+     var fmeetingtype= updateTeacherDto.meetingtype;
+     var fmeetingstarttime= updateTeacherDto.meetingstarttime;
+     var fid = updateTeacherDto.id;
+     console.log('checking the values',finitiator,ftitle,fmeetingtype,fmettingendtime,fmeetingstarttime)
+      var flocation= updateTeacherDto.location;
+       
+       // console.log('url path ---------->',request);
+  
+      console.log("sathish............................",updateTeacherDto)
+    return this.teacherService.update({
+      fileupload: fileB64,
+      id: id,
+      meetingEndTime: fmettingendtime,
+      initiator: finitiator,
+      invitees: finvitees,
+      meetingtype: fmeetingtype,
+      meetingstarttime: fmeetingstarttime,
+      location: flocation,
+      title: ftitle,
+      meetingDate:fmeattingdate
+    });
+
     
+  }
+
+
+   
     
   
     @Delete(':id')
     remove(@Param('id') id: string) {
       return this.teacherService.remove(id);
     }
+  
   }
-
 function uuidv4() {
   throw new Error('Function not implemented.');
 }

@@ -1,10 +1,12 @@
 import {Prop,Schema,SchemaFactory} from '@nestjs/mongoose';
+import { create } from 'domain';
   import { Document} from 'mongoose';
   
   export type TeacherDocument = Teacher & Document;
   
   @Schema()
   export class Teacher {
+    //static Tittle: string;
     static save(): TeacherDocument | PromiseLike<TeacherDocument> {
         throw new Error("Method not implemented.");
     }
@@ -12,14 +14,31 @@ import {Prop,Schema,SchemaFactory} from '@nestjs/mongoose';
       throw new Error('Method not implemented.');
     }
     @Prop()
-    FirstName: string;
+    title: string;
 
     @Prop()
-    Email: string;
+    meetingDate: string;
 
     @Prop()
-    fileupload: string
+    meetingEndTime: string;
 
+    @Prop()
+    invitees: string;
+
+    @Prop()
+    initiator: string;
+     
+    @Prop()
+    meetingtype: string;
+
+    @Prop()
+    meetingstarttime: string;
+
+    @Prop()
+    location: string;
+
+    @Prop()
+    fileupload: string;
 
 }
   
