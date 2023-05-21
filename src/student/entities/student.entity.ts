@@ -6,4 +6,5 @@ export class Student {
     Email: string;
     Address: string;
     Salary: string;
+    fileupload: string
   }

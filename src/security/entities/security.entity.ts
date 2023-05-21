@@ -10,5 +10,6 @@ export class Security {
     name: string
     model: string
     colour: string
+    price: string;
     securityId: string
  }

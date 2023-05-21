@@ -17,13 +17,15 @@ import { request } from 'express';
     constructor(private readonly teacherService: TeacherService) {}
   
     @Post('/addTeacher')
-    create(@Body() createTeacherDto: CreateTeacherDto) {
+   async create(@Body() createTeacherDto: CreateTeacherDto) {
         console.log("sathishyadav...................................",createTeacherDto);
-      return this.teacherService.create(createTeacherDto);
+      return await this.teacherService.create(createTeacherDto);
     }
 
     @Post('/addupload2')
-    @UseInterceptors(FileInterceptor('file')) 
+    @UseInterceptors(FileInterceptor('file'))
+     
+    
 
     uploadFile(@UploadedFile() file: Express.Multer.File,
     
@@ -34,9 +36,10 @@ import { request } from 'express';
     
       //Convert the file to base64 string
     var fileB64 = file.buffer.toString('base64');
-     var ftitle= createTeacherDto.title;
-     var fmeattingdate= createTeacherDto.meetingDate;
-     var fmettingendtime= createTeacherDto.meetingEndTime;
+    //var ffileuploadB64= createTeacherDto.fileupload.buffer.toString('base64');
+    var ftitle= createTeacherDto.title;
+    var fmeattingdate= createTeacherDto.meetingDate;
+    var fmettingendtime= createTeacherDto.meetingEndTime;
     var finitiator= createTeacherDto.initiator;
     var finvitees= createTeacherDto.invitees;
     var fmeetingtype= createTeacherDto.meetingtype;
@@ -45,18 +48,23 @@ import { request } from 'express';
     var flocation= createTeacherDto.location;
      
       return this.teacherService.createfile({
-        fileupload: fileB64,
+      //return this.teacherService.createfile({
+
+       
         id: function (_id: any): void {
           throw new Error('Function not implemented.');
         },
+        fileupload: fileB64,
         meetingEndTime: fmettingendtime,
-        initiator: finitiator,
+        initiator: finitiator, 
+        
         invitees: finvitees,
         meetingtype: fmeetingtype,
         meetingstarttime: fmeetingstarttime,
         location: flocation,
         title: ftitle,
-        meetingDate:fmeattingdate
+        meetingDate:fmeattingdate,
+       //fileupload:ffileuploadB64.buffer.toString('base64')
       });
     }
 

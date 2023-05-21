@@ -10,14 +10,7 @@ export class SecurityVehicleController {
   constructor(private readonly securityService: SecurityService) {}
 
 
- 
-  
-
-
-  
-  
-  
-  @Get('/security')
+ @Get('/security')
   async getSecurityVehicles(@Param('id') securityId: string) {
     return this.securityService.getSecurityVehicles(securityId);
   }

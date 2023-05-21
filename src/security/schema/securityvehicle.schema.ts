@@ -17,51 +17,21 @@ export class Vehicle {
 
  // @Prop({ required: true}) 
   //securityId: string;
+  
+  @Prop({ required: true})
+  price: string;
 
- 
-
-  // Many-to-One relationship with Security
-
-
-
-  @Prop({ type: Types.ObjectId, ref: 'Security' })
+   // Many-to-One relationship with Security
+ @Prop({ type: Types.ObjectId, ref: 'Security' })
   securityId: Types.ObjectId;
-
-
-
 
  // @Prop({ type: mongoose.Schema.Types.ObjectId,ref: 'Security'})
   //security: Security
  
 
 }
-
 export const VehicleSchema = SchemaFactory.createForClass(Vehicle);
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//export class Vehicle{
-  //  id: string
-    //model: string
-   // c//olour: string
-  //  se//curityId: string
-//}

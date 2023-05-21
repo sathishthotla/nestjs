@@ -1,0 +1,21 @@
+1. file path
+2.   pwd
+3.  cd newapp
+4.  pwd
+5.   echo "# nestjs" >> REDME.md
+6. git init
+7.  git add README.md
+ 8. git coomit -m"first commit"
+ 9. git branch -M main
+ 10 .git remote add origin          11.https://github.com/sathishthotla/nestjs.git
+ 12. git push -u origin main
+ 13. git status
+  14.git add test
+  15.git status
+  16.git commit -m"total code commit"
+17 .git add .
+  https://github.com/sathishthotla/nestjs.git
+
+
+
+https://www.topcoder.com/thrive/articles/build-nest-js-crud-api-with-mongodb

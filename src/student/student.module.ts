@@ -1,19 +1,8 @@
-import {
-    Module
-  } from '@nestjs/common';
-  import {
-    StudentService
-  } from './student.service';
-  import {
-    StudentController
-  } from './student.controller';
-  import {
-    Student,
-    StudentSchema
-  } from './schema/student.schema';
-  import {
-    MongooseModule
-  } from '@nestjs/mongoose';
+import { Module } from '@nestjs/common';
+  import { StudentService } from './student.service';
+  import { StudentController } from './student.controller';
+  import { Student,StudentSchema} from './schema/student.schema';
+  import { MongooseModule} from '@nestjs/mongoose';
   
   @Module({
     imports: [
@@ -22,6 +11,10 @@ import {
           name: Student.name,
           schema: StudentSchema
         },
+        {
+          name: Student.name,
+          schema: StudentSchema
+        }
      ])
     ],
     controllers: [StudentController],

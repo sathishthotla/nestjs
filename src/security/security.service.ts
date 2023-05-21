@@ -6,9 +6,11 @@ import { Vehicle,VehicleDocument } from './schema/securityvehicle.schema';
 import { CreateSecurityDto } from './dto/create-security.dto';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateSecurityDto } from './dto/update-security.dto';
+import { Any } from 'typeorm';
 
 @Injectable()
 export class SecurityService {
+  securityVehicleDetailsModel: any;
   findoneSecurityVehicles(securityId: string) {
     throw new Error('Method not implemented.');
   }
@@ -19,9 +21,10 @@ export class SecurityService {
     @InjectModel(Security.name) private securityModel: Model<SecurityDocument>,
     @InjectModel(Vehicle.name) private vehicleModel: Model<VehicleDocument>,
   ) {}
+  
  
 
-   async getSecurityVehicles(securityId: string): Promise<Vehicle[]> {
+ async getSecurityVehicles(securityId: string): Promise<Vehicle[]> {
     return this.vehicleModel.find({ security: securityId }).populate('securityId').exec();
   }
 

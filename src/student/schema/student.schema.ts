@@ -5,26 +5,42 @@ import {Prop,Schema,SchemaFactory} from '@nestjs/mongoose';
   
   @Schema()
   export class Student {
-    @Prop()
+    id(id: any, arg1: { profileImage: any; }) {
+      throw new Error('Method not implemented.');
+    }
+   //@Prop()
+    //FirstName: string;
+  
+    //Prop()
+    //urName: string;
+
+    //@Prop()
+    //Designation: string;
+  
+    //@Prop()
+    //Email: string;
+  
+    //@Prop()
+    //Address: string;
+  
+ //   @Prop()
+   // Salary: string;
+  
+    //@Prop()
+    //Gender: string;
+
+    //@Prop()
+    //fileupload: string;
+  
     FirstName: string;
-  
-    @Prop()
     SurName: string;
-  
-    @Prop()
     Designation: string;
-  
-    @Prop()
     Email: string;
-  
-    @Prop()
     Address: string;
-  
-    @Prop()
     Salary: string;
-  
-    @Prop()
     Gender: string;
+  
+   
   }
   
   export const StudentSchema = SchemaFactory.createForClass(Student);
