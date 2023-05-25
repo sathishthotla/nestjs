@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Security,SecurityDocument } from './schema/security.schema';
 import { Vehicle,VehicleDocument } from './schema/securityvehicle.schema';
+
 import { CreateSecurityDto } from './dto/create-security.dto';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateSecurityDto } from './dto/update-security.dto';

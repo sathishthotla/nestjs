@@ -17,31 +17,40 @@ export class CompanyController {
   findAll() {
     return this.companyService.findAll();
   }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.companyService.findOne(+id);
-  // }
-  @Get('getProductCount/:id')
-  getProductCount(@Param('id') id: string) {
-    return this.companyService.getProductCount(id);
+  @Get('sortCompany')
+  sortCompany() {
+    return this.companyService.sortCompany();
   }
 
-  @Get('getProductminprice/:id')
-  getProductminprice(@Param('id') id: string) {
-    return this.companyService.getProductminprice(id);
-  }
-  @Get('getProductmaxprice/:id')
-  getProductmaxprice(@Param('id') id: string) {
-    return this.companyService.getProductmaxprice(id);
-  }
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
-    return this.companyService.update(+id, updateCompanyDto);
+ @Get('matchCompany1')
+  matchCompany() {
+   return this.companyService.matchCompany();
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.companyService.remove(+id);
+  @Get('limitCompany')
+  limitCompany(){
+    return this.companyService.limitCompany();
   }
+  
+  @Get('countCompany')
+  countCompany() {
+    return this.companyService.countCompany();
+  }
+
+
+  @Get('norSortDoc')
+  norSortDoc(){
+    return this.companyService.norSortDoc();
+ }
+
+ @Get('maxminresults')
+ maxminresults(){
+  return this.companyService.maxminresults();
+}
+
+@Get('unwindCompany')
+unwindCompany(){
+  return this.companyService.unwindCompany();
+} 
+
 }

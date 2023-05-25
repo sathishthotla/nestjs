@@ -30,6 +30,16 @@ export class SecurityVehicleController {
     return this.securityService.createVehicle(securityId, createvehicleDto);
   }
 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   @Patch(':id')
   async updateSecurity(@Param('id') securityId: string, @Body() updatesecurityDto: UpdateSecurityDto) {
     return this.securityService.updateSecurity(securityId, updatesecurityDto);
