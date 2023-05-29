@@ -8,6 +8,7 @@ import { Product } from './schema/product.schema';
 
 @Injectable()
 export class CompanyService {
+  
  
 
     constructor(
@@ -27,34 +28,30 @@ export class CompanyService {
     return this.companyModel.find();
   }
 
-  //pipeline example
-     pipeLine() {
-     const pipeline = this.companyModel.aggregate( [
-      // Stage 1: 
-      {
-         $match: { address: "hyd3" }
-      },
-      // Stage 2:
-      {
-         $group: { _id: "$name", count: { $sum: 1 } }
-      }
+  //group example
+     groupCompany() {
+     const groupCompany = this.companyModel.aggregate( [
+      
+      { $match: { address: "knr2" }},
+      { $group: { _id: "$name", count: { $sum: 1 } }}
    ] )
-   return pipeline;
+   return groupCompany;
   }
 
 
  //count
    async countCompany() :Promise<any> {
    const countCompany  = await this.companyModel.aggregate( [
-   { $count: "CompanydetailsCount" }
+   { $count: "productsdetailsCount" }
    ])
    return countCompany;
    }
 //match
 
    async matchCompany(): Promise<any> {
-   const matchCompany = await this.companyModel.
-   aggregate( [ { $match: { address: "knr" } },
+   const matchCompany = await this.companyModel.aggregate( [ 
+     { $match: { address: "knr" } },
+     
    ])
    return matchCompany;
    }
@@ -87,7 +84,7 @@ export class CompanyService {
     return limitCompany;
     }
 
-//Normalize and Sort Documents
+//project and Sort Documents
 
      async norSortDoc() : Promise<any>{
      const norSortDoc = await this.companyModel.
@@ -97,15 +94,77 @@ export class CompanyService {
      return norSortDoc;
     }
 
-//
+//unwind
     async unwindCompany() : Promise<any> {
       const unwindCompany = await this.companyModel.aggregate( [
           {
-           $unwind: "$products" } ,
-        
+          $unwind: "$products" } ,
           {$sort: { "address": 1 }
-        }] )
+    }
+   ] )
       return unwindCompany;
     }
 
-}
+    //lookup
+    async lookupCompany() : Promise<any> {
+      const lookupCompany = await this.companyModel.aggregate( [
+        {
+          $lookup:
+       {
+         from: "products",
+         localField: "model",
+         foreignField: "name",
+         as: "anything"
+            }
+       }
+     ] )
+     return lookupCompany;
+    }
+
+
+    //skip
+    async skipCompany(){
+      const skipCompany = await this.companyModel.aggregate([
+        { $skip : 4 }
+    ]);
+      return skipCompany;
+      }
+
+      //$sortByCount
+
+      async sortByCompany(){
+        const sortByCompany = await this.companyModel.aggregate([
+          { $sortByCount:  "$name" }
+      ]);
+        return sortByCompany ;
+         }
+
+//sampleCompany
+         async sampleCompany(){
+          const sampleCompany = await this.companyModel.aggregate(
+            [ { $sample: { size: 3 } } ]
+         );
+        
+          return sampleCompany ;
+           }
+//first&last
+           async firstCompany(){
+            const firstCompany = await this.companyModel.aggregate([
+              {
+                $group:{
+                  _id:'$name',
+                  company_count:{$sum:1},
+                  record:{ $first:'$products'}
+                 }
+               }
+            ])
+            return firstCompany ;
+          }
+        }
+
+
+     
+      
+  
+
+

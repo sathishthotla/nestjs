@@ -17,6 +17,11 @@ export class CompanyController {
   findAll() {
     return this.companyService.findAll();
   }
+  @Get('groupCompany')
+  groupCompany() {
+    return this.companyService.groupCompany()
+
+  }
   @Get('sortCompany')
   sortCompany() {
     return this.companyService.sortCompany();
@@ -51,6 +56,32 @@ export class CompanyController {
 @Get('unwindCompany')
 unwindCompany(){
   return this.companyService.unwindCompany();
-} 
+}
+
+@Get('lookupCompany')
+lookupCompany(){
+  return this.companyService.lookupCompany();
+}
+
+@Get('skipCompany')
+skipCompamy(){
+  return this.companyService.skipCompany();
+}
+
+@Get('sortByCompany')
+sortByCompany(){
+  return this.companyService.sortByCompany();
+}
+
+@Get('sampleCompany')
+sampleCompany(){
+  return this.companyService.sampleCompany();
+}
+@Get('firstCompany')
+firstCompany(){
+  return this.companyService.firstCompany()
+}
+
+
 
 }
