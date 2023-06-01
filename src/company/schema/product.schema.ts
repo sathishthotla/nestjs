@@ -14,5 +14,9 @@ export class Product {
   model: string;
   @Prop()
   price: string;
+  @Prop()
+  companyId: string;
+  @Prop({type: Types.ObjectId, ref: 'Company'})
+   companys:Types.ObjectId;
 }
 export const ProductSchema = SchemaFactory.createForClass(Product);

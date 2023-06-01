@@ -15,14 +15,41 @@ import { TeacherModule } from './teacher/teacher.module';
 import { Security } from './security/entities/security.entity';
 import { SecurityModule } from './security/security.module';
 import { CompanyModule } from './company/company.module';
+import { AuthModule } from './auth/auth.module';
+//import { UsersModule } from './users/users.module';
+//import { AuthsModule } from './auths/auths.module';
+import { UsersModule } from './users/users.module';
+
 
 
 
 @Module({
   imports: [
-MongooseModule.forRoot('mongodb://127.0.0.1:27017/newtask'),
-TeacherModule,SecurityModule,MulterModule.register({
-  dest:'./uploads/profileImage',
-}), CompanyModule,
+MongooseModule.forRoot('mongodb://127.0.0.1:27017/auths'),
+MulterModule. 
+register({
+ // dest:'./uploads/profileImage',
+ 
+}), AuthModule, UsersModule,
+// AuthsModule,
 ],})
 export class AppModule {}
+
+
+
+
+
+
+
+
+// imports: [
+//   MongooseModule.forRoot('mongodb://127.0.0.1:27017/auth'),
+//   TeacherModule,SecurityModule,MulterModule. 
+//   register({
+//    // dest:'./uploads/profileImage',
+   
+//   }), CompanyModule, AuthModule, UsersModule,
+//   // AuthsModule,
+//   ],})
+//   export class AppModule {}
+  

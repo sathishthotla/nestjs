@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Company } from './schema/company.schema';
 import { Product } from './schema/product.schema';
-
+import { CreateProductDto } from './dto/create-product.dto';
 @Injectable()
 export class CompanyService {
   
@@ -18,7 +18,7 @@ export class CompanyService {
 
     async create(createCompanyDto: CreateCompanyDto): Promise<Company> {
     const createdCompany = await this.companyModel.create(createCompanyDto);
-    //const companyId = createdCompany.id;
+    const companyId = createdCompany.id;
     //console.log('----cid-->',companyId);
     //const createdProduct = await this.productModel.create(createCompanyDto.products,);
     return createdCompany;
@@ -32,8 +32,9 @@ export class CompanyService {
      groupCompany() {
      const groupCompany = this.companyModel.aggregate( [
       
-      { $match: { address: "knr2" }},
-      { $group: { _id: "$name", count: { $sum: 1 } }}
+     // { $match: { address: "knr2" }},
+      // { $group: { _id: "$address", count: { $sum: 1 } }},
+      { $group: { _id: "$name", totalDoc: { $push: "$$ROOT" } }}
    ] )
    return groupCompany;
   }
@@ -43,6 +44,7 @@ export class CompanyService {
    async countCompany() :Promise<any> {
    const countCompany  = await this.companyModel.aggregate( [
    { $count: "productsdetailsCount" }
+   //{ $count: "companydetailsCount" }
    ])
    return countCompany;
    }
@@ -51,6 +53,7 @@ export class CompanyService {
    async matchCompany(): Promise<any> {
    const matchCompany = await this.companyModel.aggregate( [ 
      { $match: { address: "knr" } },
+     {$group: {"_id":{name:"$name",products:"$products"}}}
      
    ])
    return matchCompany;
