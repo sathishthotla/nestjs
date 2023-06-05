@@ -7,36 +7,29 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('/addUser')
-  async create(@Body() createUserDto: CreateUserDto) {
+  @Post()
+  create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
-   console. log(Body) 
-   
-    }
+  }
 
-  @Get('user')
+  @Get()
   findAll() {
-    return this.userService.findAll();
+   // return this.userService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    console.log(id)
-    return this.userService.findOne(+id);
+    //return this.userService.findOne(+id);
+  }
+  
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    //return this.userService.update(+id, updateUserDto);
   }
 
-  @Patch('/updateuser/:id')
-  update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
-    console.log("checking1-------->"+id);
-    return this.userService.update(+id, updateUserDto);
-
-  }
-  //@Patch('/updateemployee/:id')
- // update(@Param('id') id: string, @Body() updateemployeeDto: UpdateEmployeeDto) {
-   // return this.employeeService.update(+id, updateemployeeDto);
-  //}
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    //return this.userService.remove(+id);
   }
 }

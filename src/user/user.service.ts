@@ -1,42 +1,40 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
+import { InjectModel } from '@nestjs/mongoose';
 
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Model } from 'mongoose';
+import { User, UserDocument } from './schema/user-schema';
 
+//
+// This should be a real class/interface representing a user entity
+//export type User = any;
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
-  ) {}
-  create(createUserDto: CreateUserDto) {
-    return this.userRepository.save(createUserDto);
-  }
+  
+  constructor(@InjectModel(User.name) private readonly userModel: Model < UserDocument > ) {}
+  
 
-  async findAll(): Promise<User[]> {
-    return this.userRepository.find();
+  // private readonly users = [
+  //   {
+  //     userId: 1,
+  //     username: 'john',
+  //     password: 'changeme',
+  //   },
+  //   {
+  //     userId: 2,
+  //     username: 'maria',
+  //     password: 'guess',
+  //   },
+  // ];
+  async create(createUserDto: CreateUserDto): Promise<User | undefined> {
+   return await this.userModel.create(createUserDto);
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(name: string): Promise<any> {
+    return this.userModel.findOne({name});
   }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    // return `This action updates a #${id} employee`;
-    
-   // return this.userRepository.update(id,UpdateUserDto);
-    return this.userRepository.update(id, { 
-      name: UpdateUserDto.name,email: updateUserDto.email
-        
-      })
-   }
-
-   remove(id: number) {
-    return this.userRepository.delete(id);
-   
-  }
+  async findAll(name: string): Promise<any> {
+    console.log('---req---',name);
+    return this.userModel.findOne({name});
+}
 }

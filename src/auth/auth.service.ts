@@ -1,24 +1,35 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from 'src/users/users.service';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class AuthService {
-    constructor(
-        private usersService: UsersService,
-        private jwtService: JwtService
-        
-        ) {}
+  
+  constructor(
+    private userService: UserService,
+    private jwtService: JwtService
+    ) {}
 
-  async signIn(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
-    if (user?.password !== pass) {
-      throw new UnauthorizedException();
+  async validateUser(name: string, pass: string): Promise<any> {
+    const user = await this.userService.findOne(name);
+    if (user && user.password === pass) {
+      const { password, ...result } = user;
+      return result;
     }
-   
-    const payload = { sub: user.userId, username: user.username };
+    return null;
+  }
+  async login(user: any) {
+    const payload = { userId: user._doc._id, name: user._doc.name };
+    //console.log('--payload-------',payload)
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token: this.jwtService.sign(payload,{ secret: 'secret123123' })
     };
+  }
+ 
+  
+    async profiles(req): Promise<any> {
+    //console.log('------------------------------------------------helpo',req);
+   // return await this.userService.findAll(req.user.name);
+   return req.user;
   }
 }
