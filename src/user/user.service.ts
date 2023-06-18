@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Model } from 'mongoose';
 import { User, UserDocument } from './schema/user-schema';
-
+import * as bcrypt from 'bcrypt';
 //
 // This should be a real class/interface representing a user entity
 //export type User = any;
@@ -12,7 +12,9 @@ import { User, UserDocument } from './schema/user-schema';
 @Injectable()
 export class UserService {
   
-  constructor(@InjectModel(User.name) private readonly userModel: Model < UserDocument > ) {}
+  constructor(@InjectModel(User.name) private readonly userModel: Model < UserDocument >,
+   
+  ) {}
   
 
   // private readonly users = [
@@ -28,10 +30,17 @@ export class UserService {
   //   },
   // ];
   async create(createUserDto: CreateUserDto): Promise<User | undefined> {
+    
+    //// hashing
+    const salt = await bcrypt.genSalt();
+    console.log('salt----->'+salt);
+    const hashPassword = await bcrypt.hash(createUserDto.password, salt);
+    createUserDto.password = hashPassword;
+    console.log('createUserDto----->'+createUserDto);
    return await this.userModel.create(createUserDto);
   }
-  async findOne(name: string): Promise<any> {
-    return this.userModel.findOne({name});
+  async findOne(email: string): Promise<any> {
+    return this.userModel.findOne({email});
   }
   async findAll(name: string): Promise<any> {
     console.log('---req---',name);

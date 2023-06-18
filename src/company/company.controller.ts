@@ -1,14 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
 import { CreateProductDto } from './dto/create-product.dto';
+import { Roles } from 'src/Role/roles.decorator';
+import { Role } from 'src/Role/role.enum';
+import { RolesGuard } from 'src/Role/roles.guard';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('company')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
 
   @Post()
+  @Roles(Role.Admin,Role.PREMIMUM)
+  
+  //@UseGuards(JwtGuard,RolesGuard)
+  @UseGuards(JwtAuthGuard,RolesGuard)
   create(@Body() createCompanyDto: CreateCompanyDto) {
     console.log('helo---->',createCompanyDto);
     return this.companyService.create(createCompanyDto);

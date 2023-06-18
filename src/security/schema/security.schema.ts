@@ -1,6 +1,6 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document, Types } from 'mongoose';
-import { Vehicle } from './securityvehicle.schema';
+//import { Vehicle } from './securityvehicle.schema';
 import { vehicle } from '../entities/security.entity';
 
 export type SecurityDocument = Security & Document;

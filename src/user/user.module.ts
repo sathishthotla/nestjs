@@ -3,6 +3,8 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schema/user-schema';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from 'src/Role/roles.guard';
 
 @Module({
   imports: [
@@ -15,7 +17,14 @@ import { User, UserSchema } from './schema/user-schema';
     ])
    ],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },UserService
+  ],
   exports: [UserService],
 })
+
+
 export class UserModule {}

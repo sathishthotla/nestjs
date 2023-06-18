@@ -5,10 +5,13 @@ import { Company } from './entities/company.entity';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CompanySchema } from './schema/company.schema';
 import { Product, ProductSchema } from './schema/product.schema';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Company.name, schema: CompanySchema },
-    { name: Product.name, schema: ProductSchema }])],
+  imports: [
+    AuthModule,MongooseModule.forFeature([{ name: Company.name, schema: CompanySchema },
+    { name: Product.name, schema: ProductSchema }
+  ])],
   controllers: [CompanyController],
   providers: [CompanyService]
 })

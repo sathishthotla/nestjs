@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document, Types } from 'mongoose';
 import { Product } from './product.schema';
+import { Role } from 'src/Role/role.enum';
 export type CompanyDocument = Company & Document;
 @Schema({ timestamps: true })
 export class Company {
@@ -10,8 +11,10 @@ export class Company {
   address: string;
   @Prop()
   info: string;
-  @Prop({type: Types.ObjectId, ref: 'Product'})
-   products:Types.ObjectId;
+  @Prop()
+  roles: Role[];
+ // @Prop({type: Types.ObjectId, ref: 'Product'})
+   //products:Types.ObjectId;
  //@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }] })
 //product: mongoose.Schema.Types.ObjectId;
 //@Prop([{ type: mongoose.Schema.Types.ObjectId, ref: Product.name }])

@@ -26,7 +26,7 @@ export class SecurityService {
  
 
  async getSecurityVehicles(securityId: string): Promise<Vehicle[]> {
-    return this.vehicleModel.find({ security: securityId }).populate('securityId').exec();
+   return this.vehicleModel.find({ security: securityId }).populate('securityId').exec();
   }
 
 

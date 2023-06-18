@@ -18,7 +18,7 @@ export class CompanyService {
 
     async create(createCompanyDto: CreateCompanyDto): Promise<Company> {
     const createdCompany = await this.companyModel.create(createCompanyDto);
-    const companyId = createdCompany.id;
+    //const companyId = createdCompany.id;
     //console.log('----cid-->',companyId);
     //const createdProduct = await this.productModel.create(createCompanyDto.products,);
     return createdCompany;
